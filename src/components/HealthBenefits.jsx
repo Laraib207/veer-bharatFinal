@@ -3,62 +3,77 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-/**
- * HealthBenefits carousel
- * - Optimized for container max-width: 1240px (use on 1240px screen)
- * - Uses plain <img> tags (place images in public/images/)
- * - Responsive visible items: 1 / 2 / 3 / 4 (>=1100 => 4 items)
- * - Infinite loop via cloning; translate3d px-based; transition: all 0.25s ease
- * - Auto-play ON by default (3s), pause on hover, prev/next works, swipe support
- *
- * Required images (put in public/images/):
- * health-benefits_01.png ... health-benefits_06.png
- *
- * To use: import HealthBenefits from "../components/HealthBenefits";
- * then include <HealthBenefits /> in your page.
- */
-
 export default function HealthBenefits() {
   // base items (change text or image names if you like)
   const baseItems = [
-    { id: 1, img: "/images/icon-1.jpeg", small: "Ideal for", bold: "high-heat cooking" },
-    { id: 2, img: "/images/icon-2.jpeg", small: "Beneficial for", bold: "heart health" },
-    { id: 3, img: "/images/icon-3.jpeg", small: "Promotes", bold: "glowing, healthy skin" },
-    { id: 4, img: "/images/icon-4.jpeg", small: "Protects cells", bold: "from oxidative damage" },
-    { id: 5, img: "/images/icon-5.jpeg", small: "Retains purity,", bold: "free from chemicals" },
-    { id: 6, img: "/images/icon-6.jpeg", small: "Supports", bold: "weight management & lowers BP" },
+    {
+      id: 1,
+      img: "/images/icon-1.jpeg",
+      small: "Ideal for",
+      bold: "high-heat cooking",
+    },
+    {
+      id: 2,
+      img: "/images/icon-2.jpeg",
+      small: "Beneficial for",
+      bold: "heart health",
+    },
+    {
+      id: 3,
+      img: "/images/icon-3.jpeg",
+      small: "Promotes",
+      bold: "glowing, healthy skin",
+    },
+    {
+      id: 4,
+      img: "/images/icon-4.jpeg",
+      small: "Protects cells",
+      bold: "from oxidative damage",
+    },
+    {
+      id: 5,
+      img: "/images/icon-5.jpeg",
+      small: "Retains purity,",
+      bold: "free from chemicals",
+    },
+    {
+      id: 6,
+      img: "/images/icon-6.jpeg",
+      small: "Supports",
+      bold: "weight management & lowers BP",
+    },
   ];
 
   // ====== CONFIG (easy to change) ======
-  const ITEM_W = 300;     // px width of each item
-  const GAP = 16;         // px gap between items (margin-right)
-  const TRANS_MS = 250;   // transition time in ms (0.25s)
-  const AUTO_MS = 3000;   // autoplay interval (3s)
-  const MIN_CLONES = 2;   // minimum cloned items on each side
+  const ITEM_W = 320; // Increased from 300px for better image display
+  const GAP = 24; // Increased gap for better spacing
+  const TRANS_MS = 350; // Slightly longer transition for smoother effect
+  const AUTO_MS = 4000; // Longer autoplay interval
+  const MIN_CLONES = 2;
   // ======================================
 
-  const [visible, setVisible] = useState(4); // number visible (responsive)
-  const [items, setItems] = useState([]);    // base + clones
-  const [index, setIndex] = useState(0);     // current index in items array
+  const [visible, setVisible] = useState(4);
+  const [items, setItems] = useState([]);
+  const [index, setIndex] = useState(0);
   const trackRef = useRef(null);
   const autoRef = useRef(null);
   const transitioningRef = useRef(false);
 
-  // responsive visible counts (optimized for 1240px)
+  // responsive visible counts
   useEffect(() => {
     function onResize() {
       const w = window.innerWidth;
       if (w < 640) setVisible(1);
       else if (w < 900) setVisible(2);
       else if (w < 1100) setVisible(3);
-      else setVisible(4); // >=1100 (1240 will fall here)
+      else setVisible(4);
     }
     onResize();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // create clones for infinite loop (cloneCount = visible or MIN_CLONES)
+  // create clones for infinite loop
   useEffect(() => {
     const cloneCount = Math.max(visible, MIN_CLONES);
     const head = baseItems.slice(0, cloneCount);
@@ -69,49 +84,49 @@ export default function HealthBenefits() {
       ...head.map((it, i) => ({ ...it, _cloned: true, _cloneId: `head-${i}` })),
     ];
     setItems(full);
-    setIndex(tail.length); // start at first real item
+    setIndex(tail.length);
   }, [visible]);
 
   // compute stage width in px
   const stageWidth = items.length * (ITEM_W + GAP);
 
-  // apply transform when index changes (with transition), then snap if in clones
+  // apply transform when index changes
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
     const x = index * (ITEM_W + GAP);
-    el.style.transition = `all ${TRANS_MS}ms ease`;
+    el.style.transition = `all ${TRANS_MS}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
     el.style.transform = `translate3d(${-x}px, 0, 0)`;
     transitioningRef.current = true;
 
     const tailLen = Math.max(visible, MIN_CLONES);
     const t = setTimeout(() => {
       transitioningRef.current = false;
-      // if we moved into the appended head clones (past end)
       if (index >= items.length - tailLen) {
-        // map back to corresponding real index
         const realIndex = tailLen + (index - (items.length - tailLen));
         el.style.transition = "none";
-        el.style.transform = `translate3d(${-realIndex * (ITEM_W + GAP)}px, 0, 0)`;
+        el.style.transform = `translate3d(${
+          -realIndex * (ITEM_W + GAP)
+        }px, 0, 0)`;
         setIndex(realIndex);
       } else if (index < tailLen) {
-        // moved into prepended tail clones -> map to corresponding real near end
-        const realIndex = tailLen + ((index - tailLen + baseItems.length) % baseItems.length);
+        const realIndex =
+          tailLen + ((index - tailLen + baseItems.length) % baseItems.length);
         el.style.transition = "none";
-        el.style.transform = `translate3d(${-realIndex * (ITEM_W + GAP)}px, 0, 0)`;
+        el.style.transform = `translate3d(${
+          -realIndex * (ITEM_W + GAP)
+        }px, 0, 0)`;
         setIndex(realIndex);
       }
     }, TRANS_MS + 20);
 
     return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, items]);
+  }, [index, items, ITEM_W, GAP, TRANS_MS, visible, baseItems.length]);
 
   // autoplay management
   useEffect(() => {
     startAuto();
     return () => stopAuto();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
   function startAuto() {
@@ -127,7 +142,7 @@ export default function HealthBenefits() {
     }
   }
 
-  // prev/next handlers (step one)
+  // prev/next handlers
   function prev() {
     if (transitioningRef.current) return;
     stopAuto();
@@ -141,7 +156,7 @@ export default function HealthBenefits() {
     startAuto();
   }
 
-  // basic swipe/drag support
+  // swipe/drag support
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
@@ -170,16 +185,21 @@ export default function HealthBenefits() {
         if (dx < 0) setIndex((i) => i + 1);
         else setIndex((i) => i - 1);
       } else {
-        // snap back
-        el.style.transition = `all ${TRANS_MS}ms ease`;
+        el.style.transition = `all ${TRANS_MS}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
         el.style.transform = `translate3d(${-index * (ITEM_W + GAP)}px, 0, 0)`;
       }
       startAuto();
     };
 
-    function touchStart(e) { onStart(e.touches[0].clientX); }
-    function touchMove(e) { onMove(e.touches[0].clientX); }
-    function touchEnd() { onEnd(); }
+    function touchStart(e) {
+      onStart(e.touches[0].clientX);
+    }
+    function touchMove(e) {
+      onMove(e.touches[0].clientX);
+    }
+    function touchEnd() {
+      onEnd();
+    }
 
     function mouseDown(e) {
       onStart(e.clientX);
@@ -204,46 +224,62 @@ export default function HealthBenefits() {
       el.removeEventListener("touchend", touchEnd);
       el.removeEventListener("mousedown", mouseDown);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, items]);
+  }, [index, items, ITEM_W, GAP, TRANS_MS]);
 
-  // ensure track has proper inline width & initial translate on mount
+  // ensure track has proper inline width & initial translate
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
     el.style.width = stageWidth ? `${stageWidth}px` : "0px";
     el.style.transform = `translate3d(${-index * (ITEM_W + GAP)}px, 0, 0)`;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stageWidth, index]);
+  }, [stageWidth, index, ITEM_W, GAP]);
 
   // RENDER
   return (
-    <section className="py-16" style={{ background: "#eaf6ef" }}>
-      <div className="mx-auto px-6" style={{ maxWidth: "1240px" /* IMPORTANT: tuned for 1240px */ }}>
-        <h2 className="text-center text-3xl md:text-4xl font-extrabold text-[#0b2b52] mb-8">HEALTH BENEFITS</h2>
+    <section
+      className="py-20"
+      style={{
+        background: "linear-gradient(135deg, #eaf6ef 0%, #f0f9f4 100%)",
+      }}
+    >
+      <div className="mx-auto px-6" style={{ maxWidth: "1240px" }}>
+        <h2 className="text-center text-4xl md:text-5xl font-bold text-[#0b2b52] mb-12 relative">
+          HEALTH BENEFITS
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#0b2b52] to-[#1e6b52] rounded-full mt-4"></div>
+        </h2>
 
         <div className="relative">
-          {/* Prev/Next visible on large screens, you can remove hidden to show always */}
+          {/* Navigation Buttons */}
           <button
             onClick={prev}
             aria-label="Previous"
-            className="hidden lg:flex items-center justify-center absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow z-40"
-            style={{ border: "1px solid rgba(0,0,0,0.06)" }}
+            className="hidden lg:flex items-center justify-center absolute -left-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white shadow-lg z-40 hover:scale-110 transition-transform duration-200 group"
+            style={{
+              border: "1px solid rgba(0,0,0,0.08)",
+              boxShadow: "0 8px 25px rgba(11, 43, 82, 0.15)",
+            }}
           >
-            ‹
+            <span className="text-2xl text-[#0b2b52] group-hover:text-[#1e6b52] transition-colors">
+              ‹
+            </span>
           </button>
 
           <button
             onClick={next}
             aria-label="Next"
-            className="hidden lg:flex items-center justify-center absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow z-40"
-            style={{ border: "1px solid rgba(0,0,0,0.06)" }}
+            className="hidden lg:flex items-center justify-center absolute -right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white shadow-lg z-40 hover:scale-110 transition-transform duration-200 group"
+            style={{
+              border: "1px solid rgba(0,0,0,0.08)",
+              boxShadow: "0 8px 25px rgba(11, 43, 82, 0.15)",
+            }}
           >
-            ›
+            <span className="text-2xl text-[#0b2b52] group-hover:text-[#1e6b52] transition-colors">
+              ›
+            </span>
           </button>
 
-          <div className="overflow-hidden" style={{ padding: "20px 28px" }}>
-            {/* TRACK (owl stage style) */}
+          <div className="overflow-hidden" style={{ padding: "30px 40px" }}>
+            {/* TRACK */}
             <div
               ref={trackRef}
               className="owl-stage"
@@ -252,14 +288,14 @@ export default function HealthBenefits() {
                 alignItems: "flex-start",
                 width: stageWidth ? `${stageWidth}px` : "0px",
                 transform: `translate3d(${-index * (ITEM_W + GAP)}px, 0, 0)`,
-                transition: `all ${TRANS_MS}ms ease`,
-                height: `${ITEM_W + 110}px`,
+                transition: `all ${TRANS_MS}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`,
+                height: `${ITEM_W + 120}px`,
               }}
             >
               {items.map((it, i) => (
                 <div
                   key={`${i}-${it._cloneId || it.id}`}
-                  className="owl-item"
+                  className="owl-item group"
                   style={{
                     width: `${ITEM_W}px`,
                     marginRight: `${GAP}px`,
@@ -269,36 +305,88 @@ export default function HealthBenefits() {
                     alignItems: "flex-start",
                   }}
                 >
-                  <div className="item text-center" style={{ width: `${ITEM_W}px` }}>
+                  <div
+                    className="item text-center transform transition-transform duration-300 group-hover:scale-105"
+                    style={{ width: `${ITEM_W}px` }}
+                  >
                     <div
                       style={{
-                        width: `${ITEM_W - 40}px`,
-                        height: `${ITEM_W - 40}px`,
+                        width: `${ITEM_W - 20}px`, // Larger container
+                        height: `${ITEM_W - 20}px`,
                         borderRadius: "50%",
                         margin: "0 auto",
-                        background: "linear-gradient(180deg, #FFE7B3 0%, #FFDDAA 100%)",
+                        background:
+                          "linear-gradient(135deg, #ffffff 0%, #f8fdf9 100%)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        boxShadow: "0 14px 36px rgba(8,52,139,0.06)",
+                        boxShadow:
+                          "0 20px 40px rgba(8, 52, 139, 0.12), 0 8px 20px rgba(11, 43, 82, 0.08)",
                         position: "relative",
-                        border: "4px dashed rgba(200,140,40,0.25)",
+                        border: "6px solid #ffffff",
                         overflow: "hidden",
+                        transition: "all 0.3s ease",
                       }}
+                      className="group-hover:shadow-2xl group-hover:border-[#1e6b52]"
                     >
+                      {/* Subtle background pattern */}
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          background:
+                            "radial-gradient(circle at 30% 30%, rgba(30, 107, 82, 0.03) 0%, transparent 50%)",
+                          borderRadius: "50%",
+                        }}
+                      />
                       <img
                         src={it.img}
                         alt={it.bold}
-                        style={{ width: "62%", height: "62%", objectFit: "contain" }}
+                        style={{
+                          width: "95%", // Larger image
+                          height: "95%",
+                          objectFit: "contain",
+                          filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.1))",
+                          transition: "all 0.3s ease",
+                        }}
+                        className="group-hover:scale-110"
                         onError={(e) => {
                           e.currentTarget.src = "/images/placeholder.png";
                         }}
                       />
                     </div>
 
-                    <div className="content mt-4">
-                      <p style={{ color: "#6b7280", margin: 0 }}>{it.small}</p>
-                      <p style={{ fontWeight: 700, color: "#1f2937", margin: 0 }}>{it.bold}</p>
+                    <div className="content mt-6 space-y-2">
+                      <p
+                        style={{
+                          color: "#6b7280",
+                          margin: 0,
+                          fontSize: "15px",
+                          fontWeight: 500,
+                          letterSpacing: "0.5px",
+                        }}
+                      >
+                        {it.small}
+                      </p>
+                      <p
+                        style={{
+                          fontWeight: 700,
+                          color: "#0b2b52",
+                          margin: 0,
+                          fontSize: "18px",
+                          lineHeight: "1.4",
+                          background:
+                            "linear-gradient(135deg, #0b2b52 0%, #1e6b52 100%)",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                        }}
+                        className="group-hover:scale-105 transition-transform duration-300"
+                      >
+                        {it.bold}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -307,13 +395,28 @@ export default function HealthBenefits() {
           </div>
         </div>
 
-        {/* helpful text below */}
-        <div className="mt-6 text-center text-sm text-gray-600">Swipe on mobile or use arrows on desktop to navigate.</div>
+        {/* Dots indicator */}
+        <div className="flex justify-center mt-8 space-x-3">
+          {baseItems.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                const tailLen = Math.max(visible, MIN_CLONES);
+                setIndex(i + tailLen);
+              }}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                (index - Math.max(visible, MIN_CLONES)) % baseItems.length === i
+                  ? "bg-[#1e6b52] w-8"
+                  : "bg-gray-300 hover:bg-gray-400"
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
 
-        {/* small debug (hidden by default) - remove or show for debugging */}
-        <div style={{ display: "none" }}>
-          <div>stage transform: translate3d({-index * (ITEM_W + GAP)}px, 0px, 0px)</div>
-          <div>stage width: {stageWidth}px</div>
+        {/* Helper text */}
+        <div className="mt-8 text-center text-sm text-gray-500 font-medium">
+          Swipe to explore more health benefits
         </div>
       </div>
     </section>

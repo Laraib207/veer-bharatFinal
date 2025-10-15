@@ -1,5 +1,5 @@
 "use client";
-import CategoryCarousel from "@/components/CategoryCarousel";
+import Hero2 from "@/components/CategoryCarousel";
 import CustomerFeedback from "@/components/CustomerFeedback";
 import VeerBharatHero from "@/components/VeerBharatHero";
 import WhyUsSection from "@/components/WhyUsSection";
@@ -25,29 +25,68 @@ export default function Home() {
 
       {/* Heading */}
 
-      <div className="py-12 md:py-16 text-center">
+      <div className="py-16 md:py-20 lg:py-24 text-center bg-gradient-to-b from-white to-gray-50/50">
         <motion.h1
-          initial={{ y: 30, opacity: 0 }}
+          initial={{ y: 40, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className={`${playfair.className} text-3xl md:text-5xl font-extrabold tracking-tight`}
+          transition={{
+            duration: 0.9,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            delay: 0.1,
+          }}
+          viewport={{ once: true, margin: "-50px" }}
+          className={`
+      ${playfair.className} 
+      text-4xl md:text-5xl lg:text-6xl 
+      font-extrabold tracking-tight
+      bg-gradient-to-r from-amber-900 via-orange-800 to-green-900
+      bg-clip-text text-transparent
+      leading-tight md:leading-snug
+      px-4 md:px-0
+    `}
         >
-          Veer Bharat — Trusted Oils, Thoughtful Practices, Tradition Meets
-          Purity
+          Veer Bharat — Trusted Oils,
+          <span className="block mt-2 md:mt-3">
+            Thoughtful Practices, Tradition Meets Purity
+          </span>
         </motion.h1>
 
         <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.7 }}
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileInView={{ scaleX: 1, opacity: 1 }}
+          transition={{
+            duration: 0.8,
+            delay: 0.3,
+            ease: "easeOut",
+          }}
           viewport={{ once: true }}
-          className="mt-4 w-32 md:w-40 mx-auto h-1 rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-green-600"
+          className="
+      mt-6 md:mt-8 
+      w-40 md:w-48 lg:w-56 
+      mx-auto h-1.5 
+      rounded-full 
+      bg-gradient-to-r 
+      from-amber-400 via-orange-500 to-green-600
+      shadow-lg shadow-amber-200/50
+    "
         />
+
+        {/* Optional decorative elements */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          viewport={{ once: true }}
+          className="mt-8 md:mt-12 flex justify-center space-x-2"
+        >
+          {[1, 2, 3].map((item) => (
+            <div key={item} className="w-2 h-2 rounded-full bg-amber-300/60" />
+          ))}
+        </motion.div>
       </div>
 
       {/* Category Carousel */}
-      <CategoryCarousel />
+      <Hero2 />
 
       {/* Categories Grid */}
       <CategoriesGrid />
@@ -89,102 +128,122 @@ export default function Home() {
 /* ================= CategoriesGrid ================= */
 
 function CategoriesGrid() {
-  const cats = [
+  const categories = [
     {
       id: "cat-1",
       name: "Mustard Oil",
-      img: "/images/Unknown-1.jpeg",
-      desc: "Mustard oil with strong aroma & flavor.",
+      image: "/images/Unknown-1.jpeg",
+      description:
+        "Mustard oil with strong aroma & flavor. Perfect for traditional cooking and pickling.",
     },
     {
       id: "cat-2",
       name: "Soyabean Oil",
-      img: "/images/Unknown-2.jpeg",
-      desc: "Light texture, rich in Vitamin E. Great for everyday cooking.",
+      image: "/images/Unknown-2.jpeg",
+      description:
+        "Light texture, rich in Vitamin E. Great for everyday cooking and heart health.",
     },
     {
       id: "cat-3",
       name: "Palm Oil",
-      img: "/images/Unknown-3.jpeg",
-      desc: "Palm oil for high-heat cooking. High stability & neutral taste.",
+      image: "/images/Unknown-3.jpeg",
+      description:
+        "Palm oil for high-heat cooking. High stability & neutral taste for versatile use.",
     },
     {
       id: "cat-4",
-      name: "Rice Brand",
-      img: "/images/Unknown-5.jpeg",
-      desc: "Rice bran oil, ideal for frying. Heart friendly & high smoke point.",
+      name: "Rice Bran Oil",
+      image: "/images/Unknown-5.jpeg",
+      description:
+        "Rice bran oil, ideal for frying. Heart friendly & high smoke point for healthy cooking.",
     },
   ];
 
   return (
-    <section
-      className="py-16 md:py-24 relative overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #DFC6F6 0%, #E8D5F9 100%)",
-      }}
-    >
-      {/* Subtle background pattern for premium feel */}
-      <div className="absolute inset-0 opacity-10">
+    <section className="relative overflow-hidden bg-gradient-to-br from-purple-50 via-violet-50 to-purple-100 py-20 md:py-28">
+      {/* Enhanced Background Pattern */}
+      <div className="absolute inset-0 opacity-20">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage:
-              'url(\'data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\')',
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.15'%3E%3Ccircle cx='40' cy='40' r='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
-        ></div>
+        />
       </div>
 
-      <div className="container mx-auto max-w-7xl px-6 relative z-10">
-        {/* Enhanced Heading */}
-        <div className="flex items-center justify-center mb-16">
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-20 -left-20 h-60 w-60 rounded-full bg-amber-200/30 blur-3xl"></div>
+        <div className="absolute -bottom-20 -right-20 h-60 w-60 rounded-full bg-purple-200/30 blur-3xl"></div>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Enhanced Header Section */}
+        <div className="mb-20 text-center">
+          <div className="inline-flex flex-col items-center">
+            <h2 className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 bg-clip-text text-4xl font-black tracking-tight text-transparent md:text-5xl lg:text-6xl">
               Explore Categories
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-500 mx-auto rounded-full"></div>
+            <div className="mt-4 h-1.5 w-32 rounded-full bg-gradient-to-r from-amber-400 to-orange-500"></div>
+            <p className="mt-6 max-w-2xl text-lg text-slate-600 md:text-xl">
+              Discover our premium range of edible oils, each crafted with care
+              for your health and taste
+            </p>
           </div>
         </div>
 
-        {/* Premium Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-          {cats.map((c) => (
+        {/* Enhanced Grid Layout */}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {categories.map((category, index) => (
             <div
-              key={c.id}
-              className="group bg-white rounded-3xl overflow-hidden border-0 shadow-xl hover:shadow-3xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 relative"
-              style={{ minHeight: "380px", maxWidth: "100%" }}
+              key={category.id}
+              className="group relative flex flex-col overflow-hidden rounded-3xl bg-white shadow-2xl transition-all duration-500 hover:scale-105 hover:shadow-3xl"
+              style={{
+                minHeight: "420px",
+                animationDelay: `${index * 100}ms`,
+              }}
             >
-              {/* Enhanced Image with Overlay */}
-              <div className="relative w-full h-72 overflow-hidden">
+              {/* Image Container */}
+              <div className="relative h-64 overflow-hidden">
                 <img
-                  src={c.img}
-                  alt={c.name}
-                  className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
+                  src={category.image}
+                  alt={category.name}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
                 />
-                {/* Premium Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                {/* Category Icon Badge - Optional premium touch */}
-                <div className="absolute top-4 right-4 bg-amber-400/90 backdrop-blur-sm rounded-full p-3 shadow-lg">
-                  <span className="text-white font-bold text-sm">★</span>
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+                {/* Premium Badge */}
+                <div className="absolute top-4 right-4 rounded-full bg-amber-500/90 p-2 shadow-lg backdrop-blur-sm">
+                  <span className="text-sm font-bold text-white">★</span>
+                </div>
+
+                {/* Category Index */}
+                <div className="absolute top-4 left-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-sm font-bold text-slate-900 shadow-sm">
+                  {index + 1}
                 </div>
               </div>
 
-              {/* Enhanced Content */}
-              <div className="p-8 flex flex-col items-center text-center relative z-10">
-                <h3 className="font-black text-2xl mb-4 text-gray-900 group-hover:text-amber-600 transition-colors duration-300 tracking-wide">
-                  {c.name}
+              {/* Content Section */}
+              <div className="flex flex-1 flex-col px-6 py-7 text-center">
+                <h3 className="mb-3 text-xl font-black text-slate-900 transition-colors duration-300 group-hover:text-amber-600 lg:text-2xl">
+                  {category.name}
                 </h3>
-                <p className="text-base text-gray-600 mb-6 leading-relaxed font-light">
-                  {c.desc}
+
+                <p className="mb-6 flex-1 text-base leading-relaxed text-slate-600">
+                  {category.description}
                 </p>
-                {/* Premium Explore Button - Linked to /product */}
+
+                {/* Enhanced CTA Button */}
                 <a
                   href="/products"
-                  className="inline-flex items-center text-sm font-bold rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white px-8 py-3 shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 group/button"
-                  style={{ boxShadow: "0 4px 20px rgba(251, 191, 36, 0.4)" }}
+                  className="group/button inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 px-8 py-4 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-amber-500/25"
                 >
                   Explore Category
                   <svg
-                    className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
+                    className="ml-3 h-4 w-4 transition-transform duration-300 group-hover/button:translate-x-1"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -192,14 +251,40 @@ function CategoriesGrid() {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={2}
+                      strokeWidth={3}
                       d="M17 8l4 4m0 0l-4 4m4-4H3"
                     />
                   </svg>
                 </a>
               </div>
+
+              {/* Hover Border Effect */}
+              <div className="absolute inset-0 rounded-3xl border-2 border-transparent transition-all duration-300 group-hover:border-amber-200/50"></div>
             </div>
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-16 text-center">
+          <a
+            href="/products"
+            className="inline-flex items-center rounded-2xl bg-slate-900 px-10 py-4 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-slate-800 hover:shadow-2xl"
+          >
+            View All Products
+            <svg
+              className="ml-3 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
@@ -605,25 +690,23 @@ function VideoShowcase() {
 /* ================= FEATURED IMAGE SECTION (bg2.jpeg) ================= */
 function FeaturedImageSection() {
   return (
-    <section className="relative w-full">
-      {/* responsive height: mobile se large screens tak */}
-      <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] xl:h-screen flex items-center justify-center bg-black">
-        {/* background image (from public/images/bg2.jpeg) */}
+    <section className="relative w-full h-screen">
+      {/* Full viewport height container */}
+      <div className="relative w-full h-full flex items-center justify-center">
         <Image
           src="/images/bg2.jpeg"
           alt="Neighbourhood freshness"
           fill
-          className="object-contain object-center"
+          className="object-cover"
+          sizes="100vw"
           unoptimized
           priority
+          quality={90}
         />
-
-        {/* agar image ke sides me khali space bachi to black bg fill karega */}
       </div>
     </section>
   );
 }
-
 // ya tumhara existing section
 
 /* ================= Branches (Gallery) ================= */
