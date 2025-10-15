@@ -4,142 +4,56 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer
-      className="relative overflow-hidden border-t-4 border-purple-300"
-      style={{
-        background: "linear-gradient(to right, #fef9c3 0%, #DFC6F6 100%)",
-        minHeight: "40vh",
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-8 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* LEFT COLUMN: Products */}
-          <div>
-            <h3 className="text-gray-900 font-extrabold text-2xl mb-5 pb-2 border-b-3 border-gray-800 inline-block">
-              Products
-            </h3>
-            <ul className="space-y-3 mt-6">
-              <li>
-                <Link
-                  href="/mustard-oil"
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Kachi Ghani Pure Mustard Oil
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/soyabean-oil"
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Soyabean Oil
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/sunflower-oil"
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Sunflower Oil
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/rice-bran-oil"
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Rice Bran Oil
-                </Link>
-              </li>
-            </ul>
-
-            {/* Company Logo */}
-            <div className="mt-8 flex items-center gap-4">
-              <div className="relative w-32 h-auto">
+    <footer className="bg-gradient-to-r from-amber-50 to-purple-100 border-t-4 border-purple-300">
+      {/* Main Footer Content */}
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+          
+          {/* Brand Column */}
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="relative w-16 h-16">
                 <Image
                   src="/logo.png"
                   alt="Veer Bharat Logo"
-                  width={128}
+                  width={64}
                   height={64}
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    objectFit: "contain",
-                  }}
+                  className="object-contain"
                   priority
                 />
               </div>
               <div>
-                <p className="text-gray-900 font-black text-xl">VEER BHARAT</p>
-                <p className="text-base text-gray-800 font-bold mt-1">
+                <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+                  VEER BHARAT
+                </h2>
+                <p className="text-lg text-gray-700 font-medium mt-1">
                   वाह! मज़ा आ गया
                 </p>
               </div>
             </div>
-          </div>
-
-          {/* MIDDLE COLUMN: Quick Links */}
-          <div>
-            <h3 className="text-gray-900 font-extrabold text-2xl mb-5 pb-2 border-b-3 border-gray-800 inline-block">
-              Quick Links
-            </h3>
-            <ul className="space-y-3 mt-6">
-              <li>
-                <Link
-                  href="/"
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/recipes"
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Recipes
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
-
-            {/* FSSAI Logo */}
-            <div className="mt-8 p-4 bg-white/60 rounded-lg border-2 border-gray-300">
+            <p className="text-gray-600 leading-relaxed mb-6">
+              Premium quality edible oils crafted with traditional wisdom 
+              and modern technology for healthier living.
+            </p>
+            
+            {/* FSSAI Certification */}
+            <div className="bg-white/80 rounded-xl p-5 border border-gray-200 shadow-sm">
               <div className="flex items-center gap-4">
-                <div className="relative w-24 h-auto">
+                <div className="relative w-16 h-16">
                   <Image
                     src="/FSSAI_Logo.png"
                     alt="FSSAI Certified"
-                    width={96}
-                    height={40}
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      objectFit: "contain",
-                    }}
+                    width={64}
+                    height={64}
+                    className="object-contain"
                     priority
                   />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-gray-900">
+                  <p className="text-sm font-semibold text-gray-900 mb-1">
                     FSSAI Certified
                   </p>
-                  <p className="text-base font-black text-gray-900 mt-1">
+                  <p className="text-base font-bold text-gray-900">
                     10012022000234
                   </p>
                 </div>
@@ -147,155 +61,142 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Important Links & Contact */}
+          {/* Products Column */}
           <div>
-            <h3 className="text-gray-900 font-extrabold text-2xl mb-5 pb-2 border-b-3 border-gray-800 inline-block">
-              Important Links
+            <h3 className="text-lg font-bold text-gray-900 mb-6 pb-3 border-b-2 border-purple-400">
+              Our Products
             </h3>
-            <ul className="space-y-3 mt-6">
-              <li>
-                {/* <Link 
-                  href="/privacy-policy" 
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Privacy Policy
-                </Link> */}
-              </li>
-              <li>
-                {/* <Link 
-                  href="/infrastructure" 
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Infrastructure
-                </Link> */}
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Blogs
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/clients"
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Clients
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/media"
-                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
-                >
-                  Media
-                </Link>
-              </li>
+            <ul className="space-y-4">
+              {[
+                { name: "Kachi Ghani Pure Mustard Oil", href: "/mustard-oil" },
+                { name: "Soyabean Oil", href: "/soyabean-oil" },
+                { name: "Sunflower Oil", href: "/sunflower-oil" },
+                { name: "Rice Bran Oil", href: "/rice-bran-oil" }
+              ].map((product) => (
+                <li key={product.name}>
+                  <Link
+                    href={product.href}
+                    className="text-gray-700 hover:text-purple-700 hover:translate-x-1 transition-all duration-300 flex items-center group"
+                  >
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-3 group-hover:bg-purple-600 transition-colors"></span>
+                    {product.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
+          </div>
 
-            {/* Contact Info
-            <div className="mt-6">
-              <p className="text-base font-black text-gray-900 mb-2">
-                SHREE ARIHANT OIL AND GENERAL MILLS
-              </p>
-              <p className="text-base font-bold text-gray-800 leading-relaxed">
-                "Fortune House", Near Navrangpura Railway Crossing,<br />
-                Ahmedabad-380009, Gujarat (India)
-              </p>
-              
-              <div className="mt-4 space-y-2">
-                <div>
-                  <p className="text-sm font-bold text-gray-900 mb-1">Phone:</p>
-                  <div className="space-y-1">
-                    <a href="tel:8802000091" className="block text-base font-bold text-gray-800 hover:text-purple-700 transition-colors">
-                      8802000091
-                    </a>
-                    <a href="tel:9216506091" className="block text-base font-bold text-gray-800 hover:text-purple-700 transition-colors">
-                      9216506091
-                    </a>
-                    <a href="tel:9216806091" className="block text-base font-bold text-gray-800 hover:text-purple-700 transition-colors">
-                      9216806091
+          {/* Quick Links Column */}
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 mb-6 pb-3 border-b-2 border-purple-400">
+              Quick Links
+            </h3>
+            <ul className="space-y-4">
+              {[
+                { name: "Home", href: "/" },
+                { name: "About Us", href: "/about" },
+                { name: "Recipes", href: "/recipes" },
+                { name: "Contact Us", href: "/contact" },
+                { name: "Blogs", href: "/blog" },
+                { name: "Media", href: "/media" }
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-700 hover:text-purple-700 transition-colors duration-300 font-medium"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact & Social Column */}
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 mb-6 pb-3 border-b-2 border-purple-400">
+              Connect With Us
+            </h3>
+            
+            {/* Contact Info */}
+            <div className="mb-8">
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">📍</span>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    "Fortune House", Near Navrangpura Railway Crossing,<br />
+                    Ahmedabad-380009, Gujarat (India)
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-purple-600">📞</span>
+                  <div>
+                    <a href="tel:8802000091" className="text-gray-700 hover:text-purple-700 transition-colors block">
+                      +91 8802000091
                     </a>
                   </div>
                 </div>
-                
-                <div className="mt-3">
-                  <p className="text-sm font-bold text-gray-900 mb-1">Email:</p>
+                <div className="flex items-center gap-3">
+                  <span className="text-purple-600">✉️</span>
                   <a 
                     href="mailto:info@arihantoilmills.com" 
-                    className="text-base font-bold text-gray-800 hover:text-purple-700 hover:underline transition-colors break-all"
+                    className="text-gray-700 hover:text-purple-700 transition-colors text-sm break-all"
                   >
                     info@arihantoilmills.com
                   </a>
                 </div>
               </div>
-            </div> */}
+            </div>
 
             {/* Social Media */}
-            <div className="mt-6">
-              <p className="text-sm font-bold text-gray-900 mb-3">Follow Us:</p>
+            <div>
+              <p className="text-sm font-semibold text-gray-900 mb-4">
+                Follow Our Journey
+              </p>
               <div className="flex gap-3">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors font-bold"
-                >
-                  f
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors font-bold text-sm"
-                >
-                  𝕏
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors font-bold text-xs"
-                >
-                  in
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors"
-                >
-                  📷
-                </a>
-                <a
-                  href="https://youtube.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors"
-                >
-                  ▶
-                </a>
-                <a
-                  href="https://wa.me/918802000091"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-green-600 text-white rounded-lg flex items-center justify-center hover:bg-green-700 transition-colors"
-                >
-                  💬
-                </a>
+                {[
+                  { icon: "📘", label: "Facebook", href: "https://facebook.com" },
+                  { icon: "🐦", label: "Twitter", href: "https://twitter.com" },
+                  { icon: "💼", label: "LinkedIn", href: "https://linkedin.com" },
+                  { icon: "📷", label: "Instagram", href: "https://instagram.com" },
+                  { icon: "▶️", label: "YouTube", href: "https://youtube.com" },
+                  { icon: "💬", label: "WhatsApp", href: "https://wa.me/918802000091", color: "bg-green-500 hover:bg-green-600" }
+                ].map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-all duration-300 transform hover:scale-110 ${social.color || ''}`}
+                    aria-label={social.label}
+                  >
+                    <span className="text-sm">{social.icon}</span>
+                  </a>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* COPYRIGHT SECTION */}
-        <div className="mt-10 pt-5 border-t-2 border-gray-400">
-          <p className="text-center text-base font-bold text-gray-900">
-            Copyright © 2025 <span className="font-black">VEER BHARAT</span>.
-            All Rights Reserved.
-          </p>
+        {/* Bottom Bar */}
+        <div className="mt-16 pt-8 border-t border-gray-300">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-700 text-sm font-medium text-center md:text-left">
+              © 2025 <span className="font-bold text-gray-900">VEER BHARAT</span>. 
+              All rights reserved. Crafted with passion for quality.
+            </p>
+            <div className="flex gap-6 text-sm font-medium">
+              <Link href="/privacy-policy" className="text-gray-600 hover:text-purple-700 transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-gray-600 hover:text-purple-700 transition-colors">
+                Terms of Service
+              </Link>
+              <Link href="/sitemap" className="text-gray-600 hover:text-purple-700 transition-colors">
+                Sitemap
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
