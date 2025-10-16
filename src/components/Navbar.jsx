@@ -978,7 +978,7 @@ export default function Navbar() {
       <header
         className={`w-full transition-all duration-500 ease-out border-b-2 ${
           scrolled 
-            ? "fixed top-0 left-0 z-[100] py-2 shadow-2xl border-purple-200/50 backdrop-blur-xl bg-[#DFC6F6]/95" 
+            ? "fixed top-0 left-0 z-50 py-2 shadow-2xl border-purple-200/50 backdrop-blur-xl bg-[#DFC6F6]/95" 
             : "relative py-4 shadow-lg border-purple-200/30 bg-[#DFC6F6]"
         }`}
       >
@@ -1095,7 +1095,7 @@ export default function Navbar() {
 
           {/* Mobile Hamburger Button */}
           <button
-            className="lg:hidden relative z-[150] w-11 h-11 sm:w-12 sm:h-12 flex flex-col items-center justify-center gap-1.5 focus:outline-none bg-white/40 rounded-xl backdrop-blur-md hover:bg-white/60 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl border border-white/50"
+            className="lg:hidden relative z-50 w-11 h-11 sm:w-12 sm:h-12 flex flex-col items-center justify-center gap-1.5 focus:outline-none bg-white/40 rounded-xl backdrop-blur-md hover:bg-white/60 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl border border-white/50"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -1117,43 +1117,48 @@ export default function Navbar() {
             />
           </button>
         </div>
-      </header>
 
-      {/* Mobile Menu - FIXED Z-INDEX */}
-      {open && (
-        <div className="lg:hidden fixed inset-0 z-[110] flex justify-end">
+        {/* Mobile Menu */}
+        <div
+          className={`lg:hidden fixed inset-0 z-40 transition-opacity duration-500 ${
+            open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
+          style={{ top: scrolled ? "70px" : "120px" }}
+        >
           <div
             className="absolute inset-0 bg-gradient-to-br from-black/70 via-purple-900/50 to-black/70 backdrop-blur-sm"
             onClick={() => setOpen(false)}
           />
 
           <div
-            className="relative w-[85vw] max-w-[380px] h-full bg-gradient-to-br from-[#DFC6F6] via-white to-[#f5ebff] shadow-2xl overflow-y-auto"
+            className={`absolute right-0 top-0 bottom-0 w-[85vw] max-w-[380px] bg-gradient-to-br from-[#DFC6F6] via-white to-[#f5ebff] shadow-2xl transform transition-all duration-500 ease-out overflow-y-auto ${
+              open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+            }`}
             style={{
               boxShadow: '-20px 0 60px rgba(8, 52, 139, 0.4), -10px 0 30px rgba(170, 34, 102, 0.2)'
             }}
           >
             {/* Decorative header */}
-            <div className="h-1.5 bg-gradient-to-r from-[#08348b] via-[#aa2266] to-[#08348b]" />
+            <div className="h-1.5 bg-gradient-to-r from-[#08348b] via-[#aa2266] to-[#08348b] animate-gradient-x" />
             
             <div className="px-4 sm:px-6 py-6 sm:py-8 flex flex-col gap-2.5 sm:gap-3">
               {/* Menu title */}
-              <div className="text-center mb-3 sm:mb-4">
+              <div className={`text-center mb-3 sm:mb-4 transition-all duration-700 ${open ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
                 <h3 className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-[#08348b] to-[#aa2266] bg-clip-text text-transparent tracking-tight">
                   Navigation Menu
                 </h3>
                 <div className="w-20 h-1 bg-gradient-to-r from-[#08348b] via-[#aa2266] to-[#08348b] rounded-full mx-auto mt-2 shadow-md" />
               </div>
 
-              <MobileLink href="/" onClick={() => setOpen(false)} icon="🏠">
+              <MobileLink href="/" onClick={() => setOpen(false)} icon="🏠" delay="100" isOpen={open}>
                 Home
               </MobileLink>
               
-              <MobileLink href="/blog" onClick={() => setOpen(false)} icon="📝">
+              <MobileLink href="/blog" onClick={() => setOpen(false)} icon="📝" delay="150" isOpen={open}>
                 Blog
               </MobileLink>
 
-              <MobileDropdown title="Products" icon="🛍️">
+              <MobileDropdown title="Products" icon="🛍️" delay="200" isOpen={open}>
                 <SubMenuLink href="/products" onClick={() => setOpen(false)}>All Products</SubMenuLink>
                 <SubMenuLink href="/soyabean-oil" onClick={() => setOpen(false)}>Soyabean Oil</SubMenuLink>
                 <SubMenuLink href="/mustard-oil" onClick={() => setOpen(false)}>Mustard Oil</SubMenuLink>
@@ -1161,7 +1166,7 @@ export default function Navbar() {
                 <SubMenuLink href="/brand-rice" onClick={() => setOpen(false)}>Brand Rice</SubMenuLink>
               </MobileDropdown>
 
-              <MobileDropdown title="Brochure" icon="📄">
+              <MobileDropdown title="Brochure" icon="📄" delay="250" isOpen={open}>
                 <button
                   onClick={() => { setViewerOpen(true); setOpen(false); }}
                   className="text-left px-4 py-3 rounded-lg text-[#08348b] hover:bg-white/90 bg-white/50 font-black transition-all text-base sm:text-lg border border-purple-100 hover:border-purple-200 hover:shadow-md w-full"
@@ -1178,17 +1183,17 @@ export default function Navbar() {
                 </a>
               </MobileDropdown>
 
-              <MobileDropdown title="Team" icon="👥">
+              <MobileDropdown title="Team" icon="👥" delay="300" isOpen={open}>
                 <SubMenuLink href="/team" onClick={() => setOpen(false)}>Our Team</SubMenuLink>
                 <SubMenuLink href="/gallery" onClick={() => setOpen(false)}>Gallery</SubMenuLink>
                 <SubMenuLink href="/Managing-Director" onClick={() => setOpen(false)}>Managing Director</SubMenuLink>
               </MobileDropdown>
 
-              <MobileLink href="/about" onClick={() => setOpen(false)} icon="ℹ️">
+              <MobileLink href="/about" onClick={() => setOpen(false)} icon="ℹ️" delay="350" isOpen={open}>
                 About
               </MobileLink>
               
-              <MobileLink href="/contact" onClick={() => setOpen(false)} icon="📞">
+              <MobileLink href="/contact" onClick={() => setOpen(false)} icon="📞" delay="400" isOpen={open}>
                 Contact
               </MobileLink>
             </div>
@@ -1196,16 +1201,16 @@ export default function Navbar() {
             <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#08348b]/5 via-purple-100/10 to-transparent pointer-events-none" />
           </div>
         </div>
-      )}
+      </header>
 
       {/* Brochure Modal */}
       {viewerOpen && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-4 md:p-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6">
           <div 
-            className="absolute inset-0 bg-gradient-to-br from-black/70 via-purple-900/50 to-black/70 backdrop-blur-md" 
+            className="absolute inset-0 bg-gradient-to-br from-black/70 via-purple-900/50 to-black/70 backdrop-blur-md animate-fadeIn" 
             onClick={() => setViewerOpen(false)} 
           />
-          <div className="relative w-full max-w-6xl h-[85vh] sm:h-[80vh] bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border-2 border-purple-200/50">
+          <div className="relative w-full max-w-6xl h-[85vh] sm:h-[80vh] bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-scaleIn border-2 border-purple-200/50">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 px-4 sm:px-6 py-3 sm:py-4 border-b-2 border-purple-200/50 bg-gradient-to-r from-[#DFC6F6] via-white to-[#f5ebff]">
               <h3 className="text-xl sm:text-2xl font-black bg-gradient-to-r from-[#082f63] to-[#aa2266] bg-clip-text text-transparent">
                 📄 Brochure Preview
@@ -1282,11 +1287,12 @@ function DropdownItem({ href, onClick, children }) {
   );
 }
 
-function MobileLink({ href, children, onClick, icon }) {
+function MobileLink({ href, children, onClick, icon, delay, isOpen }) {
   return (
     <LogoLink
       href={href}
-      className="px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-[#08348b] font-black text-lg sm:text-xl bg-gradient-to-r from-white/80 to-white/60 hover:from-white hover:to-white/90 transition-all transform hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl shadow-md backdrop-blur-sm border-2 border-purple-100/50 hover:border-purple-200 flex items-center gap-2.5 sm:gap-3"
+      className={`px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-[#08348b] font-black text-lg sm:text-xl bg-gradient-to-r from-white/80 to-white/60 hover:from-white hover:to-white/90 transition-all transform hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl shadow-md backdrop-blur-sm border-2 border-purple-100/50 hover:border-purple-200 flex items-center gap-2.5 sm:gap-3 duration-700 ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
+      style={{ transitionDelay: `${delay}ms` }}
       onClick={onClick}
     >
       <span className="text-2xl sm:text-3xl">{icon}</span>
@@ -1296,9 +1302,12 @@ function MobileLink({ href, children, onClick, icon }) {
   );
 }
 
-function MobileDropdown({ title, icon, children }) {
+function MobileDropdown({ title, icon, delay, isOpen, children }) {
   return (
-    <details className="group">
+    <details 
+      className={`group transition-all duration-700 ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
       <summary className="px-4 sm:px-5 py-3.5 sm:py-4 cursor-pointer list-none flex items-center justify-between bg-gradient-to-r from-white/80 to-white/60 hover:from-white hover:to-white/90 rounded-xl transition-all shadow-md hover:shadow-xl backdrop-blur-sm border-2 border-purple-100/50 hover:border-purple-200 active:scale-[0.98]">
         <span className="flex items-center gap-2.5 sm:gap-3 text-[#08348b] font-black text-lg sm:text-xl">
           <span className="text-2xl sm:text-3xl">{icon}</span>
@@ -1306,7 +1315,7 @@ function MobileDropdown({ title, icon, children }) {
         </span>
         <span className="text-[#08348b] text-xl sm:text-2xl font-black group-open:rotate-180 transition-transform duration-300">▾</span>
       </summary>
-      <div className="pl-6 sm:pl-8 pr-3 sm:pr-4 pb-2 pt-3 flex flex-col gap-2">
+      <div className="pl-6 sm:pl-8 pr-3 sm:pr-4 pb-2 pt-3 flex flex-col gap-2 animate-fadeIn">
         {children}
       </div>
     </details>
