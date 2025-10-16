@@ -291,23 +291,25 @@ function CategoriesGrid() {
   );
 }
 
+
+
 function VideoShowcase() {
   const videos = [
     {
       id: "v-1",
       video: "https://www.youtube.com/embed/7CzsdYLnAD4?si=xjDjX8W30kevuCYc",
-      title: "Mumbai sagie is bar Veer Bharat ke pakwalno ke saath",
+      title: "Coustomer Review | Veer Bharat Mustard Oil | Kachi Ghani Mustard Oil & Soyabean Oil jus watch it.",
     },
     {
       id: "v-2",
-      video: "https://www.youtube.com/embed/7CzsdYLnAD4?si=xjDjX8W30kevuCYc",
+      video: "https://www.youtube.com/embed/_36qbMVzWLY?si=LyoH9t-M_wBzVEOQ",
       title:
-        "veer Bharat Kachi Ghani Mustard Oil: The Heart of Healthy Indian Cooking",
+        "veer Bharat Kachi Ghani Mustard Oil: The Heart of Healthy Indian Cooking. This is our manufacturing process video you must watch it",
     },
     {
       id: "v-3",
-      video: "https://www.youtube.com/embed/7CzsdYLnAD4?si=xjDjX8W30kevuCYc",
-      title: "holi ho is bar veer Bharat ke saath",
+      video: "https://www.youtube.com/embed/0oh__XTrd9g?si=z_xT4BZNj7h-GBby",
+      title: "Planning to build our salea team and distributor network. Prospective candidates can watch this video.",
     },
   ];
 
