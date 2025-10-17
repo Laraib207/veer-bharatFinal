@@ -320,13 +320,12 @@ const Footer = () => {
             </h3>
             <div className="mt-6 space-y-3">
               <p className="text-gray-800 font-bold text-base leading-relaxed">
-                "Fortune House", Near Navrangpura Railway Crossing,<br />
-                Ahmedabad-380009, Gujarat (India)
+                "7th Floor, Tower B, Ithum,Plot No-A-40, Sector 62, Noida, Uttar Pradesh 201301(India)
               </p>
               <div>
                 <p className="text-sm font-bold text-gray-900 mb-1">Phone:</p>
                 <a href="tel:8802000091" className="block text-base font-bold text-gray-800 hover:text-purple-700 transition-colors">
-                  +91 8802000091
+                  +91 9266328444
                 </a>
               </div>
               <div>
@@ -335,7 +334,7 @@ const Footer = () => {
                   href="mailto:info@arihantoilmills.com" 
                   className="text-base font-bold text-gray-800 hover:text-purple-700 transition-colors break-all"
                 >
-                  info@arihantoilmills.com
+                  info@veerbharat.com
                 </a>
               </div>
             </div>
@@ -345,11 +344,11 @@ const Footer = () => {
               <p className="text-sm font-bold text-gray-900 mb-3">Follow Us:</p>
               <div className="flex gap-3">
                 {[
-                  { icon: 'f', href: 'https://facebook.com' },
+                  { icon: 'f', href: 'https://www.facebook.com/veerbharatofficial' },
                   { icon: '𝕏', href: 'https://twitter.com' },
                   { icon: 'in', href: 'https://linkedin.com' },
-                  { icon: '📷', href: 'https://instagram.com' },
-                  { icon: '▶', href: 'https://youtube.com' },
+                  { icon: '📷', href: 'https://www.instagram.com/veerbharatofficial' },
+                  { icon: '▶', href: 'https://youtube.com/@veerbharatofficial' },
                   { icon: '💬', href: 'https://wa.me/918802000091', color: 'bg-green-600 hover:bg-green-700' }
                 ].map((social) => (
                   <a 
