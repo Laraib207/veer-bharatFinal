@@ -320,7 +320,7 @@ const Footer = () => {
             </h3>
             <div className="mt-6 space-y-3">
               <p className="text-gray-800 font-bold text-base leading-relaxed">
-                "7th Floor, Tower B, Ithum,Plot No-A-40, Sector 62, Noida, Uttar Pradesh 201301(India)
+                8th Floor, Tower B, Ithum,Plot No-A-40, Sector 62, Noida, Uttar Pradesh 201301(India)
               </p>
               <div>
                 <p className="text-sm font-bold text-gray-900 mb-1">Phone:</p>
