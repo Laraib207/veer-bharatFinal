@@ -11,7 +11,7 @@ const products = [
     short:
       "Light, versatile and nutrition-forward—lets ingredients shine without heaviness.",
     image: "/images/soyabeennnn.jpg",
-    price: "180",
+    price: "",
     video: "/product-demo.mp4",
   },
   {
@@ -20,7 +20,7 @@ const products = [
     short:
       "Traditional cold-pressed purity with authentic aroma and robust flavor.",
     image: "/images/musterddd.jpg",
-    price: "220",
+    price: "",
     video: "/product-demo.mp4",
   },
   {
@@ -29,7 +29,7 @@ const products = [
     short:
       "Heart-healthy choice with balanced nutrition, high smoke point ideal for deep frying.",
     image: "/images/soyabeennnn.jpg",
-    price: "195",
+    price: "",
     video: "/product-demo.mp4",
   },
   {
@@ -37,7 +37,7 @@ const products = [
     name: "Palm Oil",
     short: "Rich, versatile cooking oil perfect for traditional recipes.",
     image: "/images/musterddd.jpg",
-    price: "165",
+    price: "",
     video: "/product-demo.mp4",
   },
   {
@@ -46,7 +46,7 @@ const products = [
     short:
       "Light golden oil with neutral taste, perfect for all-purpose cooking.",
     image: "/images/soyabeennnn.jpg",
-    price: "175",
+    price: "",
     video: "/product-demo.mp4",
   },
   {
@@ -54,7 +54,7 @@ const products = [
     name: "Brand Rice",
     short: "Premium quality rice with authentic aroma and perfect texture.",
     image: "/images/musterddd.jpg",
-    price: "210",
+    price: "",
     video: "/product-demo.mp4",
   },
 ];
