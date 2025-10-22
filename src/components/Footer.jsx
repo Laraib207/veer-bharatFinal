@@ -261,8 +261,8 @@ const Footer = () => {
                 />
               </div>
               <div>
-                <p className="text-gray-900 font-black text-xl">VEER BHARAT</p>
-                <p className="text-base text-gray-800 font-bold mt-1">वाह! मज़ा आ गया</p>
+                <p className="text-gray-900 font-black text-xl">Shri Shyam Agro Industries</p>
+                {/* <p className="text-base text-gray-800 font-bold mt-1">वाह! मज़ा आ गया</p> */}
               </div>
             </div>
           </div>
